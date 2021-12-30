@@ -36,8 +36,11 @@ async function run() {
       //   body,
       // });
 
+      result = "";
+
       // leave comments on target PR
       const promises = conflictInfo.conflictPrs.map(c => {
+        result += conflictInfo.pull_number + " ";
         const body = commentTpl +
           `#${conflictInfo.pull_number}\nconflictable files: ${c.conflicts.map(f => `\`${f}\``).join(',')}`;
 
@@ -50,9 +53,9 @@ async function run() {
 
       await Promise.all(promises);
 
-      core.warning(conflictInfo.conflictPrs.toString());
+      core.warning(result);
       core.exportVariable('test', 'hello_world');
-      core.exportVariable('conflicts', conflictInfo.conflictPrs.toString());
+      core.exportVariable('conflicts', result);
       core.warning("Potential conflicts detected!");
       // core.setFailed("Potential conflicts detected!");
     }
