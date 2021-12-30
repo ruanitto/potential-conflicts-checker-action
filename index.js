@@ -50,8 +50,11 @@ async function run() {
 
       await Promise.all(promises);
 
-      core.setOutput("conflicts", conflictInfo.conflictPrs.toString());
+      core.warning(conflictInfo.conflictPrs.toString());
+      core.exportVariable('test', 'hello_world');
+      core.exportVariable('conflicts', conflictInfo.conflictPrs.toString());
       core.warning("Potential conflicts detected!");
+      // core.setFailed("Potential conflicts detected!");
     }
   }
   catch (error) {
