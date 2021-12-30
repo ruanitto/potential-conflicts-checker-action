@@ -53,9 +53,9 @@ async function run() {
 
       await Promise.all(promises);
 
-      core.warning(result);
+      core.warning(inspect(conflictInfo, {depth:3}));
       core.exportVariable('test', 'hello_world');
-      core.exportVariable('conflicts', result);
+      core.exportVariable('conflicts', inspect(conflictInfo, {depth:3}));
       core.warning("Potential conflicts detected!");
       // core.setFailed("Potential conflicts detected!");
     }
