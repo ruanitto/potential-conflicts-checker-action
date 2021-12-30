@@ -30,25 +30,28 @@ async function run() {
         conflictInfo.conflictPrs.map(c =>
           `#${c.number}\nconflictable files: ${c.conflicts.map(f => `\`${f}\``).join(',')}`
         ).join('\n');
-      await leaveComment({
-        octokit,
-        pull_number: conflictInfo.pull_number,
-        body,
-      });
+      // await leaveComment({
+      //   octokit,
+      //   pull_number: conflictInfo.pull_number,
+      //   body,
+      // });
 
       // leave comments on target PR
       const promises = conflictInfo.conflictPrs.map(c => {
         const body = commentTpl +
           `#${conflictInfo.pull_number}\nconflictable files: ${c.conflicts.map(f => `\`${f}\``).join(',')}`;
 
-        return leaveComment({
-          octokit,
-          pull_number: c.number,
-          body,
-        });
+        // return leaveComment({
+        //   octokit,
+        //   pull_number: c.number,
+        //   body,
+        // });
       });
 
       await Promise.all(promises);
+
+      core.setOutput("conflicts", conflictInfo.conflictPrs.toString());
+      core.warning("Potential conflicts detected!");
     }
   }
   catch (error) {
