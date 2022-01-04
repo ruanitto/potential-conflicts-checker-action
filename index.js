@@ -10,9 +10,9 @@ const commentTpl = `This Pull Request may conflict if the Pull Requests below ar
 
 async function run() {
   try {
-    if (context.eventName !== 'pull_request' && context.eventName !== 'pull_request_target') {
-      throw new Error(`This action only work with pull_request and pull_request_target event not  ${context.eventName}`);
-    }
+    // if (context.eventName !== 'pull_request' && context.eventName !== 'pull_request_target') {
+    //   throw new Error(`This action only work with pull_request and pull_request_target event not  ${context.eventName}`);
+    // }
 
     // This should be a token with access to your repository scoped in as a secret.
     // The YML workflow will need to set myToken with the GitHub Secret Token
